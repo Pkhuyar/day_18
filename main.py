@@ -70,8 +70,28 @@ except:
     print("roleback cancle the error query")
 
 
-cursor.execute("SELECT * FROM students")
+
+def add_details(name,age,grade):
+    cursor.execute("INSERT INTO students (name, age, grade) VALUES (?, ?, ?)", (name, age, grade))
+    conn.commit()
+    print("DATA inserted")
+
+def data_del(id):
+    cursor.execute("DELETE FROM students WHERE id = ?", (id,))
+    conn.commit()
+    print(f"The row which has {id} deleted")
+def show_tab():
+    cursor.execute("SELECT * FROM students")
+    rows = cursor.fetchall()
+    for row in rows:       
+        print(row)
+
+#add_details("BOBTHEDOG", 11, "A")
+
+"""cursor.execute("SELECT * FROM students")
 rows = cursor.fetchall()
 
 for row in rows:
-    print(row)
+    print(row)"""
+
+show_tab()
